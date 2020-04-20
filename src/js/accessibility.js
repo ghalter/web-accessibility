@@ -17,6 +17,13 @@ $(document).ready(function(){
     $("#font-decrease-button").on("click", function (e) {
         applyFontSizeChange(-1);
     });
+    $("#font-increase-button-1").on("click", function (e) {
+        applyFontSizeChange(1);
+    });
+    $("#font-decrease-button-1").on("click", function (e) {
+        applyFontSizeChange(-1);
+    });
+
 });
 
 
