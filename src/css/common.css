@@ -7,16 +7,6 @@ html {
     height: 100%
 }
 
-body a,
-body div,
-body p {
-    color: #dfdfdf
-}
-
-body a:hover {
-    color: #cdcdcd
-}
-
 .title {
     font-size: 2rem;
     font-weight: 100
