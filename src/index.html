@@ -210,23 +210,26 @@
                 <div class="col-12 col-lg-6">
                     <div class="p-4 mt-4 mr-lg-3 bg-white news">
                         <div class="text-primary mb-4 title"><h2>News &amp; events</h2></div>
-                        <article class="media mt-4">
-                            <img class="my-1 mr-2 rounded-right" src="./img/iceberg.jpg">
+                        <article class="media mt-4" role="article"> 
+                            <img class="my-1 mr-2 rounded-right" src="./img/iceberg.jpg" aria-label="Iceberg Image">
                             <div class="media-body text-scalable">
-                                <div class="text-info mt-0 mb-2 subtitle text-scalable">
+                                <header class="text-info mt-0 mb-2 subtitle text-scalable">
                                     <a href="./article.html">Global temperature record</a>
-                                </div>
+                                </header>
+                                <section class="content">
                                 <p>
                                     The global surface temperature relative to 1951-1980 average recently published by
                                     NASA shows that 2016 ranks as the warmest
                                     year on record.
                                 </p>
+                                
                                 <div class="my-3 text-secondary text-right text-scalable">
-                                    <div>2018/01/15</div>
+                                    <div> 2018/01/15 </div>
                                 </div>
+                                </section>
                             </div>
                         </article>
-                        <article class="media mt-4">
+                        <article class="media mt-4" role="article">
                             <img class="my-1 mr-2 rounded-right" src="./img/universe.jpg">
                             <div class="media-body  text-scalable">
                                 <div class="text-info mt-0 mb-2 subtitle  text-scalable">
@@ -242,7 +245,7 @@
                                 </div>
                             </div>
                         </article>
-                        <article class="media mt-4">
+                        <article class="media mt-4" role="article">
                             <img class="my-1 mr-2 rounded-right" src="./img/robots.jpg">
                             <div class="media-body  text-scalable">
                                 <div class="text-info mt-0 mb-2 subtitle text-scalable">
@@ -263,7 +266,7 @@
                         </article>
                     </div>
                 </div>
-                <div class="col-12 col-lg-6">
+                <aside class="col-12 col-lg-6">
                     <div class="p-4 mt-4 bg-white studies">
                         <div class="text-primary mb-4 title text-scalable"><h2>Studies</h2></div>
                         <p class="font-weight-bold">Advance your scientific education</p>
@@ -310,7 +313,7 @@
                             </p>
                         </div>
                     </div>
-                </div>
+                </aside>
             </div>
         </div>
     </main>
