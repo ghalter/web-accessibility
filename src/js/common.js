@@ -25,26 +25,26 @@ function openMenu(event) {
  * Toggle the navigation content
  * @param {object} event - The DOM event
  */
-function toggleNavigation(event) {
-    event.stopPropagation();
-    event.preventDefault();
+// function toggleNavigation(event) {
+//     event.stopPropagation();
+//     event.preventDefault();
 
-    var content = document.getElementById('nav-bar-content');
-    if (content.classList.contains('collapse')) {
-        content.classList.remove('collapse');
-    } else {
-        content.classList.add('collapse');
-    }
-}
+//     var content = document.getElementById('nav-bar-content');
+//     if (content.classList.contains('collapse')) {
+//         content.classList.remove('collapse');
+//     } else {
+//         content.classList.add('collapse');
+//     }
+// }
 
-document.addEventListener('DOMContentLoaded', function() {
-    var dropDownToggles =
-        document.querySelectorAll('#nav-bar-content .dropdown-toggle');
+// document.addEventListener('DOMContentLoaded', function() {
+//     var dropDownToggles =
+//         document.querySelectorAll('#nav-bar-content .dropdown-toggle');
 
-        for (var i = 0; i < dropDownToggles.length; i++) {
-        dropDownToggles[i].addEventListener('click', openMenu, false);
-    }
+//         for (var i = 0; i < dropDownToggles.length; i++) {
+//         dropDownToggles[i].addEventListener('click', openMenu, false);
+//     }
 
-    document.querySelector('.navbar-toggler')
-        .addEventListener('click', toggleNavigation, false);
-}, false);
+//     document.querySelector('.navbar-toggler')
+//         .addEventListener('click', toggleNavigation, false);
+// }, false);
