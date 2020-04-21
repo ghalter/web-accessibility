@@ -13,6 +13,28 @@
     border-color: #dee2e6 #dee2e6 #fff
 }
 
+.navbar-collapse .hidden-desktop {
+    display: none;
+}
+
+
+
+a:focus{
+    border: solid brown 3px;
+    background-color: rgb(190, 190, 190);
+    color:black !important;
+}
+a:hover {
+    border: solid brown 3px;
+    background-color: rgb(190, 190, 190);
+    color:black !important;
+}
+
+a {
+    border: solid 3px;
+    border-color: transparent;
+}
+
 .bg-dark {
     background-color: #101010 !important
 }
