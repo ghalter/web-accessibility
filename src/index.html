@@ -120,160 +120,57 @@
         </div>
       </nav>
 
-    <!-- OLD NAV -->
-    <!-- <nav role="navigation">
-        <div class="container-fluid bg-dark nav text-scalable">
-            <div class="container">
-                <div class="d-lg-none">
-                    <div class="btn-toolbar justify-content-end">
-                        <div class="btn-group btn-group-lg">
-                            <button class="btn btn-dark text-white font-increase-button text-scalable"
-                                id="font-increase-button-1">A+</button>
-                            <button class="btn btn-dark text-white font-decrease-button text-scalable"
-                                id="font-decrease-button-1">a-</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="navbar navbar-dark bg-dark navbar-expand-lg px-0">
-                    <div class="navbar-brand d-lg-none">
-                        <img class="rounded-right" src="./img/logo.jpg" width="40" height="40">
-                    </div>
-                    <button class="navbar-toggler" type="button">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="nav-bar-content">
-                        <div class="navbar-nav mr-auto">
-                            <ul>
-                            <div class="nav-item">
-                                <a class="nav-link" href="./">Homepage</a>
-                            </div>
-                            <div class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="nav-bar-faculties" aria-haspopup="true">Faculties</a>
-                                <div class="dropdown-menu text-scalable" aria-expanded="false">
-                                    <div>
-                                        <a class="dropdown-item" href="./empty.html?title=Applied+sciences">Applied
-                                            sciences</a>
-                                    </div>
-                                    <div>
-                                        <a class="dropdown-item"
-                                            href="./empty.html?title=Architecture+%26+planning">Architecture &amp;
-                                            planning</a>
-                                    </div>
-                                    <div>
-                                        <a class="dropdown-item"
-                                            href="./empty.html?title=Construction+%26+environment">Construction &amp;
-                                            environment</a>
-                                    </div>
-                                    <div>
-                                        <a class="dropdown-item" href="./empty.html?title=Engineering">Engineering</a>
-                                    </div>
-                                    <div>
-                                        <a class="dropdown-item"
-                                            href="./empty.html?title=Health+%26+social+sciences">Health &amp; social
-                                            sciences</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="nav-bar-education" aria-haspopup="true" >Education &amp;
-                                    research</a>
-                                <div class="dropdown-menu text-scalable" aria-expanded="false">
-                                    <div>
-                                        <a class="dropdown-item" href="./empty.html?title=Bachelor">Bachelor</a>
-                                    </div>
-                                    <div>
-                                        <a class="dropdown-item" href="./empty.html?title=Master">Master</a>
-                                    </div>
-                                    <div>
-                                        <a class="dropdown-item"
-                                            href="./empty.html?title=Continuing+education">Continuing education</a>
-                                    </div>
-                                    <div>
-                                        <a class="dropdown-item" href="./empty.html?title=Doctorate">Doctorate</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="nav-bar-industry" aria-haspopup="true">Industry &amp;
-                                    partners</a>
-                                <div class="dropdown-menu text-scalable" aria-expanded="false">
-                                    <div>
-                                        <a class="dropdown-item" href="./empty.html?title=Public+relations">Public
-                                            relations</a>
-                                    </div>
-                                    <div>
-                                        <a class="dropdown-item"
-                                            href="./empty.html?title=Commercialization">Commercialization</a>
-                                    </div>
-                                    <div>
-                                        <a class="dropdown-item"
-                                            href="./empty.html?title=Sponsors+%26+partners">Sponsors &amp; partners</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </ul>
-                        <div class="navbar-nav">
-                            <div class="nav-item">
-                                <a class="nav-link" href="./login.html">Login</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </nav> -->
-    
     <main role="main">
         <div class="container main text-scalable high-contrast-bg-white" id="main">
             <div class="row no-gutters">
                 <div class="col-12 col-lg-6">
                     <div class="p-4 mt-4 mr-lg-3 bg-white news">
                         <div class="text-primary mb-4 title"><h2>News &amp; events</h2></div>
-                        <article class="media mt-4" role="article"> 
+                        <article class="media mt-4" role="article" aria-labelledby="article-title"> 
                             <img class="my-1 mr-2 rounded-right" src="./img/iceberg.jpg" alt="Iceberg floating in ocean">
                             <div class="media-body text-scalable">
-                                <header class="text-info mt-0 mb-2 subtitle text-scalable">
-                                    <a href="./article.html">Global temperature record</a>
+                                <header>
+                                    <h3 id="article-title" class="text-info mt-0 mb-2 subtitle text-scalable">
+                                        <a href="./article.html">Global temperature record</a>
+                                    </h3>
                                 </header>
-                                <section class="content">
                                 <p>
                                     The global surface temperature relative to 1951-1980 average recently published by
                                     NASA shows that 2016 ranks as the warmest
                                     year on record.
                                 </p>
-                                
-                                <div class="my-3 text-secondary text-right text-scalable">
-                                    <div> 2018/01/15 </div>
-                                </div>
-                                </section>
+                                <footer class="my-3 text-secondary text-right text-scalable">
+                                    <p> 2018/01/15 </p>
+                                </footer>
                             </div>
                         </article>
-                        <article class="media mt-4" role="article">
+                        <article class="media mt-4" role="article" aria-labelledby="article-title2">
                             <img class="my-1 mr-2 rounded-right" src="./img/universe.jpg" alt="Artistic image of nebula in universe">
                             <div class="media-body  text-scalable">
-                                <div class="text-info mt-0 mb-2 subtitle  text-scalable">
-                                    <a href="./empty.html?title=Article">At iam decimum annum in spelunca iacet</a>
-                                </div>
+                                <header>
+                                    <h3  id="article-title2" class="text-info mt-0 mb-2 subtitle  text-scalable">
+                                        <a href="./empty.html?title=Article">At iam decimum annum in spelunca iacet</a>
+                                    </h3>
+                                </header>
                                 <p>
                                     Immo vero, inquit, ad beatissime vivendum parum est, ad beate vero satis. Claudii
                                     libidini, qui tum erat summo ne imperio,
                                     dederetur. Ergo id est convenienter naturae vivere, a natura discedere.
                                 </p>
-                                <div class="my-3 text-secondary text-right  text-scalable">
-                                    <div>2018/01/12</div>
-                                </div>
+                                <footer class="my-3 text-secondary text-right  text-scalable">
+                                    <p>2018/01/12</p>
+                                </footer>
                             </div>
                         </article>
-                        <article class="media mt-4" role="article">
+                        <article class="media mt-4" role="article" aria-labelledby="article-title3">
                             <img class="my-1 mr-2 rounded-right" src="./img/robots.jpg" alt="Robot with wheels and arms facing to the camera.">
                             <div class="media-body  text-scalable">
-                                <div class="text-info mt-0 mb-2 subtitle text-scalable">
-                                    <a href="./empty.html?title=Article">Quo plebiscito decreta a senatu est consuli
-                                        quaestio Cn</a>
-                                </div>
+                                <header>
+                                    <h3 class="text-info mt-0 mb-2 subtitle text-scalable" id="article-title3">
+                                        <a href="./empty.html?title=Article">Quo plebiscito decreta a senatu est consuli
+                                            quaestio Cn</a>
+                                    </h3>
+                                </header>
                                 <p>
                                     Comprehensum, quod cognitum non habet? Quia nec honesto quic quam honestius nec
                                     turpi turpius. Maximeque eos videre possumus
@@ -281,9 +178,9 @@
                                     enim
                                     effectrix multarum et magnarum voluptatum.
                                 </p>
-                                <div class="my-3 text-secondary text-right text-scalable">
-                                    <div>2017/12/30</div>
-                                </div>
+                                <footer class="my-3 text-secondary text-right text-scalable">
+                                    <p>2017/12/30</p>
+                                </footer>
                             </div>
                         </article>
                     </div>

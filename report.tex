@@ -1,0 +1,447 @@
+%%% Template originaly created by Karol Kozioł (mail@karol-koziol.net) and modified for ShareLaTeX use
+
+\documentclass[a4paper,11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{xcolor}
+
+\renewcommand\familydefault{\sfdefault}
+\usepackage{tgheros}
+\usepackage[defaultmono]{droidmono}
+
+\usepackage{amsmath,amssymb,amsthm,textcomp}
+\usepackage{enumerate}
+\usepackage{multicol}
+\usepackage{tikz}
+
+\usepackage{geometry}
+\geometry{left=25mm,right=25mm,%
+bindingoffset=0mm, top=20mm,bottom=20mm}
+
+\usepackage{xcolor}
+\newcommand\todo[1]{\textcolor{red}{TODO: #1}}
+
+\usepackage{biblatex}
+\bibliographystyle{ieeetr}
+\bibliography{bibliography.bib}
+
+\linespread{1.3}
+
+\newcommand{\linia}{\rule{\linewidth}{0.5pt}}
+
+% custom theorems if needed
+\newtheoremstyle{mytheor}
+    {1ex}{1ex}{\normalfont}{0pt}{\scshape}{.}{1ex}
+    {{\thmname{#1 }}{\thmnumber{#2}}{\thmnote{ (#3)}}}
+
+\theoremstyle{mytheor}
+\newtheorem{defi}{Definition}
+
+% my own titles
+\makeatletter
+\renewcommand{\maketitle}{
+\begin{center}
+\vspace{2ex}
+{\huge \textsc{\@title}}
+\vspace{1ex}
+\\
+\linia\\
+\@author \hfill \@date
+\vspace{4ex}
+\end{center}
+}
+\makeatother
+%%%
+
+\usepackage{minted}
+
+% custom footers and headers
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{}
+\chead{}
+\rhead{}
+\lfoot{Assignment \textnumero{} 5}
+\cfoot{}
+\rfoot{Page \thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+%
+
+% code listing settings
+\usepackage{listings}
+
+\begin{document}
+
+\title{Web and mobile accessibility}
+
+\author{Mark Martori Lopez, Gaudenz Halter, University of Zurich}
+
+\date{20.04.2020}
+
+\maketitle
+
+\section{Assignment 1}
+\subsection{Features that do not work as expected}
+\begin{itemize}
+    \item Font size increase/decrease button
+    \item 
+\end{itemize}
+
+\subsection{Features that are implemented but not very accessible}
+\begin{itemize}
+    \item Icon is usually expected as the "home" button
+    \item Font size buttons not clearly labeled
+    \item Navigation not on the top
+    \item Navigation: Dropdown not visible
+    \item Navigation: state not visible
+    \item Login form: very low contrast
+    \item Login form: No groupings
+    \item Login form: Visual cues are not strong enough
+    
+    \item Low contrast ratio in the menu
+\end{itemize}
+
+\subsection{Turned off css styling}
+\begin{itemize}
+    \item Heading is not declared as heading
+    \item Navigation is not accessible due to bad structuring. 
+    \item 
+\end{itemize}
+
+\newpage
+\section{Accessible design}
+As a general approach, we added a new \emph{accessibility.css} and \emph{accessibility.js} file to the page, where we include our global changes to the site. These files are included in all html files. 
+
+\subsection{Contrast ratio}
+To increase the contrast within the navigation and the text sections, we removed the \mintinline{css}{body a}, \mintinline{css}{body div} and \mintinline{css}{body p} section from the \emph{common.css}. We also added two new classes to the css to specify the contrast specifically. \\
+Additionally, we changed the design of the nav when hovered and focused, so the user can better perceive the current location of the cursor: 
+
+
+\begin{minted}{css}
+.high-contrast-bg-dark{
+    background-color: rgb(0, 0, 0) !important;
+    color: rgb(255, 255, 255) !important;
+}
+
+.high-contrast-bg-white{
+    background-color: rgb(255, 255, 255) !important;
+    color: rgb(0, 0, 0) !important;
+}
+
+a:focus{
+    border: solid brown 3px;
+    background-color: rgb(190, 190, 190);
+    color:black !important;
+}
+a:hover {
+    border: solid brown 3px;
+    background-color: rgb(190, 190, 190);
+    color:black !important;
+}
+a {
+    border: solid 3px;
+    border-color: transparent;
+}
+
+\end{minted}
+
+\subsection{Page regions}
+In the original implementation, the page has not been divided into different page regions. We  improved this matter by dividing the page into \emph{header}, \emph{nav},  \emph{main} and  \emph{footer}. Additionally, the \emph{index.html} also contains a side bar with additional links which we encapulated using an \emph{aside} tag.
+
+\subsection{Font scaling}
+The buttons on the webpage to scale the font-size have not been hooked to any functionality. To resolve this, we created a JavaScript event which scales all fonts by a given amount of pixels up or down. The naive approach would be to do this via the bootstrap \mintinline{css}{.body} class. However, this class is usually overriden by subsequent classes, thus, scaling will only be applied in classes where no other font-size is declared. We therefore added a new class \mintinline{css}{.text-scalable} which we use explicitly in the html, to define all regions, which should be scaled when the buttons are clicked. \\
+
+To make sure the user can find the resize button in the collapsed mode, we keep it in the navbar when collapsed for mobile.
+
+
+\begin{minted}{javascript}
+    
+    function applyFontSizeChange(t){
+        $(".text-scalable").each(function() {
+            let val = parseFloat($(this).css("font-size")) + t;
+            $(this).css("font-size", val + "px");
+        })
+    }
+    
+    
+    /**
+     * Hooking up the document with the javascript
+     */
+    $(document).ready(function(){
+        $("#font-increase-button").on("click", function (e) {
+            applyFontSizeChange(1);
+        });
+        $("#font-decrease-button").on("click", function (e) {
+            applyFontSizeChange(-1);
+        });
+        
+        ...
+    });
+    
+\end{minted}{javascript}
+
+\subsection{Reading order}
+Compare the HTML code carefully against the actual layout, can you find something counter intuitive? If you turn off the CSS, do you see any difference? If you use a screen reader, what would the
+reading order be?
+Can you propose a solution to improve the HTML code so that the HTML code structure better reflects what the user sees?
+\todo{
+I really dont see any order problem... not sure if im doing something wrong or if there is not anymore. Yes, I already changed it. I will check on the original version again later. This probably was fixed when I reimplemented the site structure. }
+
+\section{Accessible navigation}
+\subsection{Headings}
+The usage of headings has been completely absent in the original document, 
+we therefore included it throughout the page. According to the MDN \footnote{https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Heading_Elements}, only one header \textbf{<h1>} should be used per page, we therefore decided to put the institute name as h1 and the subtitles in the index.html as h2. Finally the headings of the articles are signed as h3. 
+
+\subsection{Articles}
+To improve the articles, we restructured them as follows: 
+We first added the article tag to the outer most div, we furthermore used the \textbf{aria-labelledby} to reference the title div correctly. For the title, we first moved it into a header tag, used \textbf{h1} to label it with the correct heading. 
+Finally we move the date into a \textbf{footer} tag.
+\begin{minted}{html}
+<article class="media mt-4" role="article" aria-labelledby="article-title"> 
+<img class="my-1 mr-2 rounded-right" src="./img/iceberg.jpg" 
+alt="Iceberg floating in ocean">
+<div class="media-body text-scalable">
+    <header>
+        <h3 id="article-title" 
+            class="text-info mt-0 mb-2 subtitle text-scalable">
+            <a href="./article.html">Global temperature record</a>
+        </h3Whats>
+    </header>
+    <p>
+        The global surface temperature relative 
+        to 1951-1980 average recently published by
+        NASA shows that 2016 ranks as the warmest
+        year on record.
+    </p>
+    <footer class="my-3 text-secondary text-right text-scalable">
+        <p> 2018/01/15 </p>
+    </footer>
+</div>
+</article>
+
+\end{minted}
+\subsection{Menu structure}
+In the original implementation, the menu was simply structured in a <nav>, however <ul> and <li> tags were missing. Checking in the no-style version, this leads to a flat hierarchy in the navigation and does not allow screen readers to comprehensively communicate the actual site structure. We therefore restructured the nav, such that the nested pages are also clear in the no-style version. 
+
+\subsection{Drop Down}
+Apart from structuring dropdowns in <li> and <ul> tags, we also use aria labels which allow us to improve the accessibility of dropdown menues by using the \mintinline{css}{aria-haspopup="true"} and \mintinline{css}{aria-expanded="false"} attribute. Adding these two attributes and connecting them correctly to the <a> items, allows the screen reader to convey if a dropdown menu is currently expanded, and that the entry is actually a dropdown button.\\
+
+To also include the user to select a menu item via the spacebar, we added an event listener to the dropdown-items, which triggers a \mintinline{javascript}{.click()} event when the spacebar is clicked:
+
+\begin{minted}{javascript}
+    $(".dropdown-item").each(function() {
+        $(this).keypress(function(e){
+            //0 on mozilla, 32 on rest
+            if (e.keyCode == 0 || e.keyCode == 32) {      
+                $(this)[0].click();
+            }
+        });
+    });
+\end{minted}
+
+Reimplementing the dropdowns correctly in bootstrap also yields the auto-closing of the dropdown menus once navigated outside, as this is a boostrap inherited functionality. 
+
+\subsection{Skip Links}
+Since skip links have been missing in the original implementation, we added them to the start of each page as a hidden div. 
+
+\begin{minted}{html}
+    <div style="visibility: hidden">
+        <a href="#nav" > Skip to navigation</a>
+        <a href="#main" >Skip to main content</a>
+        <a href="#footer">Skip to footer</a>
+    </div>
+\end{minted}
+
+\section{Accessible Forms}
+Open the login.html file in your code editor and exam the source code carefully. Do you think the form labels
+are implemented and associated with the corresponding input controls correctly? Would a screen reader user
+experience any difficulty when interacting with these forms? Can you improve the situation?\\
+
+\todo{We definitely have to use the aria-describedby and label for attributes in the forms: 
+See here: https://getbootstrap.com/docs/4.0/components/forms/}
+
+\begin{minted}{css}
+    <form id="login-form" novalidate>
+        <div class="form-group">
+            <input class="form-control" id="login-email-control" type="email" placeholder="Email" required style="position: relative; top: 10px;">
+                <p style="position: relative; top: -60px;">Email</p>
+                <small class="invalid-feedback"></small>
+        </div>
+        <div class="form-group">
+            <input class="form-control" id="login-password-control" type="password" placeholder="Password" style="position: relative; top: 10px;">
+                <p style="position: relative; top: -60px;">Password</p>
+                <small class="invalid-feedback"></small>
+        </div>
+        <div class="form-group">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="remember" id="login-remmeber-control">
+                <label class="form-check-label">Keep me logged in</label>
+            </div>
+        </div>
+        <button class="btn btn-primary" id="login-login-button" type="submit">Login</button>
+        <button class="btn btn-link text-danger ml-3" id="login-forgot-button" type="button">Forgot password</button>
+    </form>
+\end{minted}{css}
+\subsection{{\textbf{Form control labelling}}:}
+As we can see, the labels of each entry are correctly associated to its entry with the proper id name. However, the color from the css file of the labels gets overwritten by another css file. This is why we need to change the following:
+
+\todo{Labels should always have a label for="input-div-id" tag: }
+
+\begin{minted}{html}
+    <div>
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email">
+    </div>
+\end{minted}
+
+\newline
+Inside {\textbf{boostrap.css}}:
+\begin{minted}{css}
+.form-control::placeholder {
+    color: #89a8a1;
+    opacity: 1
+}
+\end{minted}{css}
+Regarding {\textbf{common.css}} :
+\begin{minted}{css}
+body a,
+body div,
+body p {
+    color: #dfdfdf
+}
+\end{minted}{css}
+Now the colors of the label and text placed in the entry will be easily differentiated. 
+\newpage
+\subsection{{\textbf{Related control grouping}}:}
+Can you update the HTML source code so that the two groups are
+grouped using the proper element instead of the generic div elements?
+\newline
+The {\textbf{<fieldset>}} tag is used to group related elements in a form. It also draws a box around the related elements.
+\newline
+{\textbf{When we initialize the form...}}
+\begin{minted}{css}
+<form id="register-form" novalidate>
+    <fieldset>
+        <div class="form-group">
+\end{minted}{css}
+\endline
+{\textbf{When we close the form...}}
+\begin{minted}{css}
+    </div>
+        <button class="btn btn-primary" id="register-register-button">Register</button>
+    </fieldset>
+</form>
+\end{minted}{css}
+
+\subsection{{\textbf{Form input validation}}:}
+If you leave the login form empty and click the login button, do you see any indication of errors?
+\newline 
+Suddenly pops a message {{\textbf{'Please correct the error(s)'}}}
+\newline
+Based on your
+knowledge, are those features sufficient to notify the user about his/her mistake?
+Can you introduce some
+improvement to the form input validation?
+\newline
+\begin{minted}{css}
+<div class="text-danger mb-4 d-none subtitle" id="login-error">Wrong email and/or password</div>
+\end{minted}{css}
+Similarly, examine the account creation form and introduce changes or improvements whenever possible.
+\newline
+First of all, we should change the '(optional)' statement to a '(mandatory)' one.
+\begin{minted}{css}
+<p class="form-label" id="register-basic-legend">Basic information
+    <small class="text-secondary">(mandatory)</small>
+\end{minted}{css}
+\newline
+Secondly, we also change the flashing message by:
+\begin{minted}{css}
+<div class="text-danger mb-4 d-none subtitle" id="register-error">Fill in the mandatory fields</div>
+\end{minted}{css}
+\newpage
+\section{Accessible images}
+Informative images are used to convey a simple concept. Common example are logos of a brand, a scene picturing the context of an article and so on. Please identify all the informative images in the sample Website.
+\begin{itemize}
+    \item Brand logo
+    \item Images of articles
+    \item Graph of climate change
+\end{itemize}\\
+After inspecting the corresponding HTML source code, please answer the following questions. Are these images accessible to people using screen readers? If not, what changes would you like to make to resolve the issue?\\
+People using screen readers {\textbf{won't be able to access the image content}} unless we specify it.\\
+\\
+Can you add accessibility features to make this part more accessible? There are several ways to implement the solution, which one do you use? What are the pros and cons?\\
+{\textbf{Typically this is done via the \emph{alt} keyword: }}
+\begin{minted}{css}
+    <img class="align-self-center mr-3 rounded-right logo" 
+        src="./img/logo.jpg" 
+        alt="Logo of Lorem Ipsum Institute of Technology">
+\end{minted}{css}\\
+The easiest way usually is to add an alt tag in order to provide a text equivalent of the image.\\
+Without considering accessibility, images can become a barrier to communication.\\
+In fact, if the picture becomes purely decorative, we should specify null alt text (alt=””).\\
+There are other ways such as adding a web page linked in order to describe the content of the picture:
+\begin{minted}{css}
+... longdesc="sample1-longdesc.html">
+\end{minted}{css}\\
+So, as we can see, the pros and cons depend on the type of picture.\\
+For the graph, we used the \emph{aria-describedby} field, to associate the description with the image.
+\begin{minted}{css}
+    <img src="./img/temperature.jpg" class="figure-img img-fluid" 
+        alt="Line chart of global average annual temperature" 
+        aria-describedby="description">
+    <p id="description" class="figure-caption text-center px-5">
+    Some description. </p>
+\end{minted}{css}
+\newpage
+\section{Accessible tables}
+\subsection{Header cells vs data cells}
+In the original implementation, the table was not splitted in to header and data cells, we therefore
+moved header of rows and columns into the corresponding fields, both belong into \emph{<th>} tags, additionally the scope of each should be defined as "col", or "row" respectively. 
+
+\begin{minted}{html}
+     <table class="table text-center">
+        <col>
+        <colgroup span="2"></colgroup>
+        <colgroup span="2"></colgroup>
+        <tr>
+            <td rowspan="2"></td>
+            <th colspan="1" scope="colgroup"></th>
+            <th colspan="2" scope="colgroup">Temperature</th>
+        </tr>
+        <tr>
+            <th scope="col">Year</th>
+            <th scope="col">Average</th>
+            <th scope="col">Smoothed</th>
+        </tr>
+        <tr>
+            <th scope="row" class="align-middle" 
+                rowspan="2">19th century</th>
+            <td>1880</td>
+            <td>-0.20</td>
+            <td>-0.13</td>
+        </tr>
+        ...
+    </table>
+\end{minted}\\
+
+\subsection{Column and row groups}
+We made sure, that <colgroup> and <rowgroup> are used correctly within the table. This is, including them into the table header, and defining their respective dimensions. For the one empty cell above year, we used a single blank cell to make sure it doesn't belong into the temperature colgroup. 
+
+
+
+\section{Exercise 7 – Accessibility test}
+Comparing your
+finding carefully against the evaluation result, have you overlooked some issues? Or have you found something that is not reported by the plugin?\\
+\\
+Close the WAVE accessibility tool, now try to reload the page with CSS disabled. Is the page layout behaving the same as you expected?\\
+\\
+Lastly, try to use a screen reader (JAWS or VoiceOver) to access the Website. Do you encounter any difficulty?\\
+
+
+
+\printbibliography
+
+\end{document}
